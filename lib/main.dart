@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: _bottomNavigationColor,
             ),
             title: Text(
-              'HOME',
+              '微信',
               style: TextStyle(color: _bottomNavigationColor),
             )),
         BottomNavigationBarItem(
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: _bottomNavigationColor,
             ),
             title: Text(
-              'Email',
+              '通讯录',
               style: TextStyle(color: _bottomNavigationColor),
             )),
         BottomNavigationBarItem(
@@ -92,16 +92,16 @@ class _MyHomePageState extends State<MyHomePage> {
               color: _bottomNavigationColor,
             ),
             title: Text(
-              'PAGES',
+              '发现',
               style: TextStyle(color: _bottomNavigationColor),
             )),
         BottomNavigationBarItem(
             icon: Icon(
-              Icons.airplay,
+              Icons.ac_unit,
               color: _bottomNavigationColor,
             ),
             title: Text(
-              'AIRPLAY',
+              '我',
               style: TextStyle(color: _bottomNavigationColor),
             )),
       ],

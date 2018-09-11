@@ -12,6 +12,9 @@ class EmailScreenState extends State<EmailScreen> {
       appBar: AppBar(
         title: Text('Email'),
       ),
+      body: new Center(
+        child: Text('Email'),
+      ),
     );
   }
 }

@@ -12,6 +12,9 @@ class AlarmsScreenState extends State<AlarmsScreen> {
       appBar: AppBar(
         title: Text('Alarms'),
       ),
+      body: new Center(
+        child: Text('Alarms'),
+      ),
     );
   }
 }

@@ -12,6 +12,9 @@ class AlrplayScreenState extends State<AlrplayScreen> {
       appBar: AppBar(
         title: Text('Alrplay'),
       ),
+      body: new Center(
+        child: Text('Alrplay'),
+      ),
     );
   }
 }
