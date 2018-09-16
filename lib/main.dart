@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Apart',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      home: new MyHomePage(title: 'Apart'),
     );
   }
 }
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: _bottomNavigationColor,
             ),
             title: Text(
-              '微信',
+              '直播',
               style: TextStyle(color: _bottomNavigationColor),
             )),
         BottomNavigationBarItem(
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: _bottomNavigationColor,
             ),
             title: Text(
-              '通讯录',
+              '视频',
               style: TextStyle(color: _bottomNavigationColor),
             )),
         BottomNavigationBarItem(
@@ -92,16 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: _bottomNavigationColor,
             ),
             title: Text(
-              '发现',
-              style: TextStyle(color: _bottomNavigationColor),
-            )),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.ac_unit,
-              color: _bottomNavigationColor,
-            ),
-            title: Text(
-              '我',
+              '我的',
               style: TextStyle(color: _bottomNavigationColor),
             )),
       ],

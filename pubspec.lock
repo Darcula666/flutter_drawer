@@ -76,6 +76,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_redux:
+    dependency: "direct main"
+    description:
+      name: flutter_redux
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.5.2"
+  flutter_simple_video_player:
+    dependency: "direct main"
+    description:
+      name: flutter_simple_video_player
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.6"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -242,6 +256,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.0+1"
+  redux:
+    dependency: transitive
+    description:
+      name: redux
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   shelf:
     dependency: transitive
     description:
@@ -352,6 +373,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.8"
+  video_player:
+    dependency: transitive
+    description:
+      name: video_player
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.6.5"
   vm_service_client:
     dependency: transitive
     description:
@@ -382,3 +410,4 @@ packages:
     version: "2.1.15"
 sdks:
   dart: ">=2.0.0-dev.68.0 <3.0.0"
+  flutter: ">=0.2.5 <2.0.0"
