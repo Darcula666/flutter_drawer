@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'dart:ui';
 import 'package:flutter_simple_video_player/flutter_simple_video_player.dart';
 
 class EmailScreen extends StatefulWidget {
@@ -20,19 +21,14 @@ class EmailScreenState extends State<EmailScreen> {
   double lastListLength = 0.0;
   bool isRefreshing = false;
   bool isLoadingMore = false;
+  var physicalSize= window.physicalSize;
 
   @override
   void initState() {
     curPage = 0;
     loadData(curPage);
-    //_controller..addListener(_scrollListener);
-  }
-
-  void _scrollListener() {
-    //滑到最底部刷新
-    if (_controller.position.pixels == _controller.position.maxScrollExtent) {
-      loadData(curPage);
-    }
+    print("width"+physicalSize.width.toString());
+    print("height"+physicalSize.height.toString());
   }
 
   Future<Null> _pullToRefresh() async {
@@ -40,52 +36,73 @@ class EmailScreenState extends State<EmailScreen> {
     print(curPage);
     subjects = []; //清空
     //下拉刷新做处理
-    setState(() {
-      //改变数据，这里随意发挥
-      loadData(curPage);
-    });
+    if (!isLoadingMore) {
+      setState(() {
+        isRefreshing = true;
+        isLoadingMore = false;
+        loadData(curPage);
+      });
+    }
     return null;
   }
 
   getBody() {
-    if (subjects.length != 0) {
-      return List.generate(
-        subjects.length,
-        (int index) => Container(
-            padding: EdgeInsets.all(2.0),
-            child: new InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => VideoFullPage(
-                            'https://youku.cdn-56.com/20180622/3878_d3968706/index.m3u8',
-                          )),
-                );
-              },
-              child: new ConstrainedBox(
-                constraints: new BoxConstraints(
-                  minHeight: 500.0,
+//    if (subjects.length != 0) {
+      List<Widget> list=List.generate(
+          subjects.length,
+          (int index) =>
+              Center(
+                child: Container(
+                    padding: EdgeInsets.all(2.0),
+                    child: new InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => VideoFullPage(
+                                      'https://youku.cdn-56.com/20180622/3878_d3968706/index.m3u8',
+                                    )),
+                          );
+                        },
+                        child: new Wrap(
+                          direction: Axis.vertical,
+                          children: <Widget>[
+                            new ConstrainedBox(
+                              constraints: new BoxConstraints(
+                                  minHeight: 100.0,
+                                  maxHeight: 150.0,
+                                  minWidth: 170.0,
+                                  maxWidth: 200.0
+                              ),
+                              child: new Image.network(
+                                subjects[index]['images']['large'],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            new Text(
+                              subjects[index]['title'],
+                              style: new TextStyle(
+                                color: Colors.deepOrange,
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ],
+                        )
+                        //
+                        )
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    new Image.network(subjects[index]['images']['large']),
-                    new Text(subjects[index]['title'])
-                  ],
-                ),
-              ),
-            )),
+              )
       );
-    } else {
+        return list;
+    //} else {
       // 加载菊花
       return CupertinoActivityIndicator();
-    }
+    //}
   }
 
   loadData(int start) async {
     String loadRUL =
-        "https://api.douban.com/v2/movie/in_theaters?count=10&start=$start";
+        "https://api.douban.com/v2/movie/in_theaters?count=12&start=$start";
     http.Response response = await http.get(loadRUL);
     var result = json.decode(response.body);
     setState(() {
@@ -119,9 +136,9 @@ class EmailScreenState extends State<EmailScreen> {
               print("scrollController====到达底部");
               print("isLoadingMore" + isLoadingMore.toString());
               lastListLength = scrollExtent;
+              isRefreshing = false;
               if (!isLoadingMore && isBottom && !isRefreshing) {
                 setState(() {
-                  isRefreshing = false;
                   isLoadingMore = true;
                   curPage++;
                   print(curPage);

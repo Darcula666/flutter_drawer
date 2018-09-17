@@ -32,7 +32,6 @@ class HomeScreenState extends State<HomeScreen> {
     var result = json.decode(response.body);
     setState(() {
       title = result['title'];
-      print('title: $title');
       subjects = result['subjects'];
     });
   }
