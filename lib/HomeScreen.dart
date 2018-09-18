@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:dio/dio.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -28,8 +29,11 @@ class HomeScreenState extends State<HomeScreen> {
 
   loadData() async {
     String loadRUL = "https://api.douban.com/v2/movie/in_theaters";
-    http.Response response = await http.get(loadRUL);
-    var result = json.decode(response.body);
+    //http.Response response = await http.get(loadRUL);
+    //var result = json.decode(response.body);
+    Dio dio = new Dio();
+    Response response=await dio.get(loadRUL);
+    var result = response.data;
     setState(() {
       title = result['title'];
       subjects = result['subjects'];

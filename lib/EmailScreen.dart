@@ -21,14 +21,14 @@ class EmailScreenState extends State<EmailScreen> {
   double lastListLength = 0.0;
   bool isRefreshing = false;
   bool isLoadingMore = false;
-  var physicalSize= window.physicalSize;
+  var physicalSize = window.physicalSize;
 
   @override
   void initState() {
     curPage = 0;
     loadData(curPage);
-    print("width"+physicalSize.width.toString());
-    print("height"+physicalSize.height.toString());
+    print("width" + physicalSize.width.toString());
+    print("height" + physicalSize.height.toString());
   }
 
   Future<Null> _pullToRefresh() async {
@@ -48,55 +48,51 @@ class EmailScreenState extends State<EmailScreen> {
 
   getBody() {
 //    if (subjects.length != 0) {
-      List<Widget> list=List.generate(
-          subjects.length,
-          (int index) =>
-              Center(
-                child: Container(
-                    padding: EdgeInsets.all(2.0),
-                    child: new InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => VideoFullPage(
-                                      'https://youku.cdn-56.com/20180622/3878_d3968706/index.m3u8',
-                                    )),
-                          );
-                        },
-                        child: new Wrap(
-                          direction: Axis.vertical,
-                          children: <Widget>[
-                            new ConstrainedBox(
-                              constraints: new BoxConstraints(
-                                  minHeight: 100.0,
-                                  maxHeight: 150.0,
-                                  minWidth: 170.0,
-                                  maxWidth: 200.0
-                              ),
-                              child: new Image.network(
-                                subjects[index]['images']['large'],
-                                fit: BoxFit.cover,
-                              ),
+    List<Widget> list = List.generate(
+        subjects.length,
+        (int index) => Center(
+              child: Container(
+                  padding: EdgeInsets.all(2.0),
+                  child: new InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VideoFullPage(
+                                    'https://youku.cdn-56.com/20180622/3878_d3968706/index.m3u8',
+                                  )),
+                        );
+                      },
+                      child: new Wrap(
+                        direction: Axis.vertical,
+                        children: <Widget>[
+                          new ConstrainedBox(
+                            constraints: new BoxConstraints(
+                                minHeight: 100.0,
+                                maxHeight: 150.0,
+                                minWidth: 170.0,
+                                maxWidth: 200.0),
+                            child: new Image.network(
+                              subjects[index]['images']['large'],
+                              fit: BoxFit.cover,
                             ),
-                            new Text(
-                              subjects[index]['title'],
-                              style: new TextStyle(
-                                color: Colors.deepOrange,
-                                fontSize: 14.0,
-                              ),
+                          ),
+                          new Text(
+                            subjects[index]['title'],
+                            style: new TextStyle(
+                              color: Colors.deepOrange,
+                              fontSize: 14.0,
                             ),
-                          ],
-                        )
-                        //
-                        )
-                ),
-              )
-      );
-        return list;
+                          ),
+                        ],
+                      )
+                      //
+                      )),
+            ));
+    return list;
     //} else {
-      // 加载菊花
-      return CupertinoActivityIndicator();
+    // 加载菊花
+    return CupertinoActivityIndicator();
     //}
   }
 

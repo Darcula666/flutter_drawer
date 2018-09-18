@@ -4,6 +4,8 @@ import 'package:flutter_drawer/EmailScreen.dart';
 import 'package:flutter_drawer/AlrplayScreen.dart';
 import 'package:flutter_drawer/HomeScreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:dio/dio.dart';
 
 void main() => runApp(new MyApp());
 
@@ -41,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    checkNetwork();
     pages
       ..add(HomeScreen())
       ..add(EmailScreen())
@@ -63,7 +66,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         parent: animationController, curve: Curves.bounceOut); //模仿小球自由落体运动轨迹
     animationController.forward();
   }
-
+    checkNetwork() async{
+      var connectivityResult = await (new Connectivity().checkConnectivity());
+      if (connectivityResult == ConnectivityResult.mobile) {
+        print('4G');
+      } else if (connectivityResult == ConnectivityResult.wifi) {
+        print('wifi');
+      }
+    }
   void _incrementCounter() {
     setState(() {
       _counter++;
